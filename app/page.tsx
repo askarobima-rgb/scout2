@@ -24,9 +24,10 @@ import InvestmentInsights from "./components/investment-insights"
 import UnusualActivity from "./components/unusual-activity"
 import SeiIntegration from "./components/sei-integration"
 import RealTimeMonitoring from "./components/real-time-monitoring"
+import LandingPage from "./components/landing-page"
 
-export default function WalletBehaviorAnalyst() {
-  const [walletAddress, setWalletAddress] = useState("sei1abc...xyz")
+export default function Home() {
+  const [walletAddress, setWalletAddress] = useState("")
   const [pulseScore, setPulseScore] = useState(87)
   const [isConnected, setIsConnected] = useState(true)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -116,66 +117,70 @@ export default function WalletBehaviorAnalyst() {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
-        <Tabs defaultValue="network" value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7 lg:w-auto lg:grid-cols-7">
-            <TabsTrigger value="network" className={getTabClassName("network")}>
-              <Globe className="h-4 w-4" />
-              <span className="hidden sm:inline">Network</span>
-            </TabsTrigger>
-            <TabsTrigger value="overview" className={getTabClassName("overview")}>
-              <BarChart3 className="h-4 w-4" />
-              <span className="hidden sm:inline">Overview</span>
-            </TabsTrigger>
-            <TabsTrigger value="spending" className={getTabClassName("spending")}>
-              <PieChart className="h-4 w-4" />
-              <span className="hidden sm:inline">Spending</span>
-            </TabsTrigger>
-            <TabsTrigger value="investment" className={getTabClassName("investment")}>
-              <TrendingUp className="h-4 w-4" />
-              <span className="hidden sm:inline">Investment</span>
-            </TabsTrigger>
-            <TabsTrigger value="unusual" className={getTabClassName("unusual")}>
-              <AlertTriangle className="h-4 w-4" />
-              <span className="hidden sm:inline">Unusual</span>
-            </TabsTrigger>
-            <TabsTrigger value="sei" className={getTabClassName("sei")}>
-              <Target className="h-4 w-4" />
-              <span className="hidden sm:inline">Sei Native</span>
-            </TabsTrigger>
-            <TabsTrigger value="monitoring" className={getTabClassName("monitoring")}>
-              <Activity className="h-4 w-4" />
-              <span className="hidden sm:inline">Real-time</span>
-            </TabsTrigger>
-          </TabsList>
+        {walletAddress ? (
+          <Tabs defaultValue="network" value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+            <TabsList className="grid w-full grid-cols-7 lg:w-auto lg:grid-cols-7">
+              <TabsTrigger value="network" className={getTabClassName("network")}>
+                <Globe className="h-4 w-4" />
+                <span className="hidden sm:inline">Network</span>
+              </TabsTrigger>
+              <TabsTrigger value="overview" className={getTabClassName("overview")}>
+                <BarChart3 className="h-4 w-4" />
+                <span className="hidden sm:inline">Overview</span>
+              </TabsTrigger>
+              <TabsTrigger value="spending" className={getTabClassName("spending")}>
+                <PieChart className="h-4 w-4" />
+                <span className="hidden sm:inline">Spending</span>
+              </TabsTrigger>
+              <TabsTrigger value="investment" className={getTabClassName("investment")}>
+                <TrendingUp className="h-4 w-4" />
+                <span className="hidden sm:inline">Investment</span>
+              </TabsTrigger>
+              <TabsTrigger value="unusual" className={getTabClassName("unusual")}>
+                <AlertTriangle className="h-4 w-4" />
+                <span className="hidden sm:inline">Unusual</span>
+              </TabsTrigger>
+              <TabsTrigger value="sei" className={getTabClassName("sei")}>
+                <Target className="h-4 w-4" />
+                <span className="hidden sm:inline">Sei Native</span>
+              </TabsTrigger>
+              <TabsTrigger value="monitoring" className={getTabClassName("monitoring")}>
+                <Activity className="h-4 w-4" />
+                <span className="hidden sm:inline">Real-time</span>
+              </TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="network">
-            <NetworkOverview />
-          </TabsContent>
+            <TabsContent value="network">
+              <NetworkOverview />
+            </TabsContent>
 
-          <TabsContent value="overview">
-            <OverviewDashboard walletAddress={walletAddress} />
-          </TabsContent>
+            <TabsContent value="overview">
+              <OverviewDashboard walletAddress={walletAddress} />
+            </TabsContent>
 
-          <TabsContent value="spending">
-            <SpendingAnalysis walletAddress={walletAddress} />
-          </TabsContent>
+            <TabsContent value="spending">
+              <SpendingAnalysis walletAddress={walletAddress} />
+            </TabsContent>
 
-          <TabsContent value="investment">
-            <InvestmentInsights walletAddress={walletAddress} />
-          </TabsContent>
+            <TabsContent value="investment">
+              <InvestmentInsights walletAddress={walletAddress} />
+            </TabsContent>
 
-          <TabsContent value="unusual">
-            <UnusualActivity walletAddress={walletAddress} />
-          </TabsContent>
+            <TabsContent value="unusual">
+              <UnusualActivity walletAddress={walletAddress} />
+            </TabsContent>
 
-          <TabsContent value="sei">
-            <SeiIntegration walletAddress={walletAddress} />
-          </TabsContent>
+            <TabsContent value="sei">
+              <SeiIntegration walletAddress={walletAddress} />
+            </TabsContent>
 
-          <TabsContent value="monitoring">
-            <RealTimeMonitoring walletAddress={walletAddress} />
-          </TabsContent>
-        </Tabs>
+            <TabsContent value="monitoring">
+              <RealTimeMonitoring walletAddress={walletAddress} />
+            </TabsContent>
+          </Tabs>
+        ) : (
+          <LandingPage />
+        )}
       </main>
     </div>
   )

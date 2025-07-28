@@ -2,11 +2,9 @@
 
 // Inspired by react-hot-toast library
 import * as React from "react"
+import { toast } from "sonner" // Assuming sonner is used for toasts
 
-import type {
-  ToastActionElement,
-  ToastProps,
-} from "@/components/ui/toast"
+import type { ToastActionElement, ToastProps } from "@/components/ui/toast"
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
@@ -16,6 +14,17 @@ type ToasterToast = ToastProps & {
   title?: React.ReactNode
   description?: React.ReactNode
   action?: ToastActionElement
+}
+
+type ToastType = "default" | "success" | "error" | "info" | "warning"
+
+interface ToastOptions {
+  description?: string
+  duration?: number
+  action?: {
+    label: string
+    onClick: () => void
+  }
 }
 
 const actionTypes = {
@@ -85,9 +94,7 @@ export const reducer = (state: State, action: Action): State => {
     case "UPDATE_TOAST":
       return {
         ...state,
-        toasts: state.toasts.map((t) =>
-          t.id === action.toast.id ? { ...t, ...action.toast } : t
-        ),
+        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t)),
       }
 
     case "DISMISS_TOAST": {
@@ -111,7 +118,7 @@ export const reducer = (state: State, action: Action): State => {
                 ...t,
                 open: false,
               }
-            : t
+            : t,
         ),
       }
     }
@@ -142,32 +149,23 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">
 
-function toast({ ...props }: Toast) {
-  const id = genId()
-
-  const update = (props: ToasterToast) =>
-    dispatch({
-      type: "UPDATE_TOAST",
-      toast: { ...props, id },
-    })
-  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
-
-  dispatch({
-    type: "ADD_TOAST",
-    toast: {
-      ...props,
-      id,
-      open: true,
-      onOpenChange: (open) => {
-        if (!open) dismiss()
-      },
-    },
-  })
-
-  return {
-    id: id,
-    dismiss,
-    update,
+function showToast(type: ToastType, title: string, options?: ToastOptions) {
+  switch (type) {
+    case "success":
+      toast.success(title, { description: options?.description, duration: options?.duration, action: options?.action })
+      break
+    case "error":
+      toast.error(title, { description: options?.description, duration: options?.duration, action: options?.action })
+      break
+    case "info":
+      toast.info(title, { description: options?.description, duration: options?.duration, action: options?.action })
+      break
+    case "warning":
+      toast.warning(title, { description: options?.description, duration: options?.duration, action: options?.action })
+      break
+    default:
+      toast(title, { description: options?.description, duration: options?.duration, action: options?.action })
+      break
   }
 }
 
@@ -186,9 +184,13 @@ function useToast() {
 
   return {
     ...state,
-    toast,
+    toast: showToast,
+    success: (title: string, options?: ToastOptions) => showToast("success", title, options),
+    error: (title: string, options?: ToastOptions) => showToast("error", title, options),
+    info: (title: string, options?: ToastOptions) => showToast("info", title, options),
+    warning: (title: string, options?: ToastOptions) => showToast("warning", title, options),
     dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
   }
 }
 
-export { useToast, toast }
+export { useToast }

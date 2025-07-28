@@ -1,30 +1,75 @@
-# Sei Network Wallet
+# Sei Network Wallet Behavior Analyst
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+This project aims to implement a comprehensive Wallet Behavior Analyst for the Sei Network, providing deep insights into wallet activities, spending patterns, investment strategies, and alerting on unusual behaviors. The application is built with a focus on utilizing free and open-source tools and APIs.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/askorobimas-projects/v0-sei-network-wallet)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/AVSLB6gRIgx)
+## Features
 
-## Overview
+### 1. Enhanced Spending Pattern Analysis
+- Categorization of spending (e.g., gaming, daily purchases, travel).
+- Behavioral analysis per generation (Gen Z, Millennials, Gen X).
+- Pattern recognition for unusual spending behavior.
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+### 2. Investment Strategy Insights
+- Predictive analytics for investment decisions.
+- Smart money identification with clustering algorithms.
+- Investment performance tracking.
+- Alpha signals for copy-trading opportunities.
 
-## Deployment
+### 3. Unusual Activity Detection
+- FlashAlert System for sub-400ms anomaly notifications.
+- Behavioral analysis for rapid transfers and high-frequency transactions.
+- Sanctions & blacklist checking (OFAC, FATF, Interpol).
+- Machine learning anomaly detection for collective behavior.
 
-Your project is live at:
+### 4. Sei Network Specific Implementation
+- Native Sei integration leveraging free RPC endpoints.
+- Compass Wallet, Fin Wallet, MetaMask (Sei V2), Keplr Wallet integration.
+- SeiDB integration for optimized state access.
+- Twin-Turbo consensus monitoring for real-time data.
+- CLOB (Central Limit Order Book) analysis for trading insights.
 
-**[https://vercel.com/askorobimas-projects/v0-sei-network-wallet](https://vercel.com/askorobimas-projects/v0-sei-network-wallet)**
+### 5. Real-Time Monitoring
+- Pending transaction monitoring.
+- Risk profile building.
+- Malicious address detection.
+- Real-time notifications.
 
-## Build your app
+## Tech Stack (Frontend)
 
-Continue building your app on:
+- **Framework:** Next.js (App Router)
+- **UI Components:** shadcn/ui
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
 
-**[https://v0.dev/chat/projects/AVSLB6gRIgx](https://v0.dev/chat/projects/AVSLB6gRIgx)**
+## Getting Started
 
-## How It Works
+1.  **Clone the repository:**
+    \`\`\`bash
+    git clone https://github.com/your-username/sei-wallet-analyst.git
+    cd sei-wallet-analyst
+    \`\`\`
+2.  **Install dependencies:**
+    \`\`\`bash
+    npm install
+    # or
+    yarn install
+    \`\`\`
+3.  **Run the development server:**
+    \`\`\`bash
+    npm run dev
+    # or
+    yarn dev
+    \`\`\`
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+## Future Enhancements (Backend & Real Data)
+
+This frontend application is designed to be integrated with a robust backend that will handle:
+- Real API integrations (Bitquery, Dune Analytics, CoinGecko, Sei Network RPC).
+- Machine Learning models for advanced analytics.
+- Database persistence (SQLite + Redis caching).
+- Real-time WebSocket connections for live data streams.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
